@@ -1,11 +1,10 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from 'react-navigation';
 import HomeScreen from '../screens/home';
 import GameScreen from '../screens/game';
 import SettingsScreen from '../screens/settings';
 import ResultsScreen from "../screens/results";
 
-const AppNavigator = StackNavigator(
-  {
+const AppNavigator = createStackNavigator({
     Home: {
       screen: HomeScreen
     },
@@ -20,10 +19,9 @@ const AppNavigator = StackNavigator(
     },
   },
   {
-    mode: "modal",
-    headerMode: "none",
+    // mode: "modal",
+    // headerMode: "none",
     initialRouteName: 'Home'
-  }
-);
+  });
 
 export default AppNavigator;

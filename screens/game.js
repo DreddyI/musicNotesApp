@@ -1,36 +1,27 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Settings from '../components/game/settingsComponent';
-import Questions from '../components/game/questionsComponent';
+import Question from '../components/game/singleQuestionComponent';
 import Results from '../components/game/resultsComponent';
 import { observer, inject } from "mobx-react";
 
 @inject("settingsStore")
 @observer
 class GameScreen extends Component {
-  componentDidMount(){
-    const {gameStore, navigation} = this.props;
+  componentWillMount(){
+    const {settingsStore, navigation} = this.props;
+    settingsStore.resetGame();
+    settingsStore.prepareQuestion();
   }
   
   render(){
-    const { gameStore, navigation } = this.props;
-    // if(gameStore.mode === 'easy'){
-        return (
-          <View style={styles.container}>
-            <Settings />
-            <Questions />
-            <Results />
-          </View>
-        );
-      // }else{
-        // return (
-          // <View style={styles.container}>
-            // <Settings />
-            // <Text>Доступен только легкий вариант</Text>
-          // </View>
-        // );
-      // }
-    }
+    return (
+      <View style={styles.container}>
+        <Question navigation={this.props.navigation}/>
+        <Results />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

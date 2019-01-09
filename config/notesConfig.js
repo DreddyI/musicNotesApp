@@ -1,0 +1,19 @@
+export const notesImages = {
+    '0a':require('../assets/notes/0a.png'),
+    '0b':require('../assets/notes/0b.png'),
+    '0g':require('../assets/notes/0g.png'),
+    '1a':require('../assets/notes/1a.png'),
+    '1b':require('../assets/notes/1b.png'),
+    '1c':require('../assets/notes/1c.png'),
+    '1d':require('../assets/notes/1d.png'),
+    '1e':require('../assets/notes/1e.png'),
+    '1f':require('../assets/notes/1f.png'),
+    '1g':require('../assets/notes/1g.png'),
+    '2a':require('../assets/notes/2a.png'),
+    '2b':require('../assets/notes/2b.png'),
+    '2c':require('../assets/notes/2c.png'),
+    '2d':require('../assets/notes/2d.png'),
+    '2e':require('../assets/notes/2e.png'),
+    '2f':require('../assets/notes/2f.png'),
+    '2g':require('../assets/notes/2g.png')
+}

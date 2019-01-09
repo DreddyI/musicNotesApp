@@ -4,13 +4,13 @@ import { observer, inject } from 'mobx-react';
 
 @inject("settingsStore")
 @observer
-export default class SettingsScreen extends Component {
+class SettingsScreen extends Component {
     componentDidMount(){
         const {settingsStore} = this.props
     }
     render(){
-        const {settingsStore} = this.props
-        const modeName = settingsStore.modeName
+        const {settingsStore, navigation} = this.props;
+        const modeName = settingsStore.modeName;
         return(
             <View>
                 <Text>Настройки</Text>
@@ -18,22 +18,25 @@ export default class SettingsScreen extends Component {
                     <Text>Режимы</Text>
                     <Text>Выбран режим: {modeName}</Text>
                     <View>
-                        <Button title="Легко" onPress={this._onPressEasy()} />
-                        <Button title="Нормально" onPress={this._onPressNormal()} />
-                        <Button title="Сложно" onPress={this._onPressHard()} />
+                        <Button title="Легко" onPress={this._onPressEasy} />
+                        <Button title="Нормально" onPress={this._onPressNormal} />
+                        <Button title="Сложно" onPress={this._onPressHard} />
                     </View>
+                    {/* <Button title="Назад" onPress={()=>{navigation.navigate('Home')}} /> */}
                 </View>
             </View>
         )
     }
 
-    _onPressEasy = ()=>{
+    _onPressEasy = () => {
         this.props.settingsStore.setMode('easy');
     }
-    _onPressNormal = ()=>{
+    _onPressNormal = () => {
         this.props.settingsStore.setMode('normal');
     }
-    _onPressHard = ()=>{
+    _onPressHard = () => {
         this.props.settingsStore.setMode('hard');
     }
 }
+
+export default SettingsScreen;

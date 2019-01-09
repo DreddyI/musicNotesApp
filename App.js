@@ -6,7 +6,7 @@ import stores from "./stores";
 
 import AppNavigator from './components/appNavigator';
 
-// const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(AppNavigator);
 
 
 export default class App extends Component {
@@ -14,7 +14,8 @@ export default class App extends Component {
   render() {
     return (
         <Provider {...stores}>
-            <AppNavigator/>
+            {/* <AppNavigator/> */}
+            <AppContainer />
         </Provider>
     );
   }
