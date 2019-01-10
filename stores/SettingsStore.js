@@ -9,6 +9,7 @@ export default class SettingsStore {
   @observable total = this.config.questions;
   @observable question = {};
   @observable gameFinished = false;
+  @observable learning = false;
 
   @computed get modeName(){
     return this.config.name;
@@ -26,7 +27,12 @@ export default class SettingsStore {
   @action resetGame(){
     this.correct = 0;
     this.done = 0;
-    this.total = this.config.questions;
+    this.total = this.learning ? 0 : this.config.questions;
+    this.gameFinished = false;
+  }
+
+  @action finishGame(){
+    this.gameFinished = true;
   }
 
   @action updateInfo(answer){
@@ -37,12 +43,29 @@ export default class SettingsStore {
     this.gameFinished = this.done === this.total;
   }
 
-  @action prepareQuestion(){
+  @action updateTotal(){
+    this.total++;
+  }
+
+  @action prepareTestQuestion(){
+    this.question = this.prepareQuestion(this.config.octaves)
+  }
+
+  @action prepareLearnQuestion(){
+    const allOctaves = ["0","1","2"];
+    this.question = this.prepareQuestion(allOctaves);
+  }
+
+  @action setLearnMode(mode){
+    this.learning = mode;
+  }
+
+  prepareQuestion(octaves){
     const notes = [];
     for(let i =0; i<3;i++){
-      let note = this.generateRandomNote();
+      let note = this.generateRandomNote(octaves);
       while(notes.indexOf(note) !== -1){
-        note = this.generateRandomNote();
+        note = this.generateRandomNote(octaves);
       }
       notes.push(note);
     }
@@ -50,15 +73,16 @@ export default class SettingsStore {
     const correctNote = notes[Math.floor(Math.random()*3)];
     const noteName = this.generateNoteName(correctNote);
 
-    this.question = {
+    return {
       'notes':notes,
       'correctNote':correctNote,
       'noteName':noteName
     };
   }
-  generateRandomNote(){
-    const randomOctave = Math.floor(Math.random() * this.config.octaves.length);
-      const selectedOctave = this.config.octaves[randomOctave];
+
+  generateRandomNote(availableOctaves){
+    const randomOctave = Math.floor(Math.random() * availableOctaves.length);
+      const selectedOctave = availableOctaves[randomOctave];
       const octaveNotes = octaves[selectedOctave].notes
       const randomNoteNum = Math.floor(Math.random() * octaveNotes.length);
       const randomNote = octaves[selectedOctave].notes[randomNoteNum];

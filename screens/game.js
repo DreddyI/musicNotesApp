@@ -11,7 +11,11 @@ class GameScreen extends Component {
   componentWillMount(){
     const {settingsStore, navigation} = this.props;
     settingsStore.resetGame();
-    settingsStore.prepareQuestion();
+    if(settingsStore.learning){
+      settingsStore.prepareLearnQuestion();
+    }else{
+      settingsStore.prepareTestQuestion();
+    }
   }
   
   render(){
